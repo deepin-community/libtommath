@@ -1,0 +1,106 @@
+Source: libtommath
+Maintainer: Debian Rakudo Maintainers <pkg-rakudo-devel@lists.alioth.debian.org>
+Uploaders: Dominique Dumont <dod@debian.org>
+Section: libs
+Priority: optional
+Build-Depends: autoconf,
+               debhelper-compat (= 12),
+               libtool
+Build-Depends-Indep: ghostscript,
+                     libtiff-tools,
+                     texlive-latex-extra,
+                     texlive-latex-recommended
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/debian/libtommath
+Vcs-Git: https://salsa.debian.org/debian/libtommath.git
+Homepage: http://www.libtom.net/LibTomMath/
+
+Package: libtommath-doc
+Architecture: all
+Multi-Arch: foreign
+Section: doc
+Depends: ${misc:Depends}
+Conflicts: libtommath-docs
+Replaces: libtommath-docs
+Description: multiple-precision integer library [documentation]
+ LibTomMath is a C language library that provides a vast array of highly
+ optimized functions for number theory; including:
+ .
+  * Simple Algebra (Addition, Subtraction, Multiplication, Division)
+  * Digit Manipulation (shift, binary AND/OR/XOR)
+  * Modular Reduction (Barrett, Montgomery, DR, 2k)
+  * Number Theory
+    - Greatest Common Divisor
+    - Least Common Multiple
+    - Jacobi Symbol Computation
+    - Multiplicative Inverse
+    - Modular Exponentiation
+    - Fermat & Miller-Rabin Primality Tests
+  * Miscellaneous
+    - Root finding over Z
+    - Pseudo-random integers
+    - Signed & Unsigned comparisons
+    - Karatsuba and Toom-Cook multiplication algorithms
+    - Fast Comba based Multiplier, Squaring and Montgomery routines
+ .
+ This package contains the documentation for the LibTomMath library.
+
+Package: libtommath-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: ${misc:Depends},
+         libtommath1 (= ${binary:Version})
+Recommends: libtommath-doc
+Description: multiple-precision integer library [development files]
+ LibTomMath is a C language library that provides a vast array of highly
+ optimized functions for number theory; including:
+ .
+  * Simple Algebra (Addition, Subtraction, Multiplication, Division)
+  * Digit Manipulation (shift, binary AND/OR/XOR)
+  * Modular Reduction (Barrett, Montgomery, DR, 2k)
+  * Number Theory
+    - Greatest Common Divisor
+    - Least Common Multiple
+    - Jacobi Symbol Computation
+    - Multiplicative Inverse
+    - Modular Exponentiation
+    - Fermat & Miller-Rabin Primality Tests
+  * Miscellaneous
+    - Root finding over Z
+    - Pseudo-random integers
+    - Signed & Unsigned comparisons
+    - Karatsuba and Toom-Cook multiplication algorithms
+    - Fast Comba based Multiplier, Squaring and Montgomery routines
+ .
+ This package contains the files needed to create programs that use LibTomMath.
+ It is not needed to merely execute programs that use LibTomMath.
+
+Package: libtommath1
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: multiple-precision integer library [runtime]
+ LibTomMath is a C language library that provides a vast array of highly
+ optimized functions for number theory; including:
+ .
+  * Simple Algebra (Addition, Subtraction, Multiplication, Division)
+  * Digit Manipulation (shift, binary AND/OR/XOR)
+  * Modular Reduction (Barrett, Montgomery, DR, 2k)
+  * Number Theory
+    - Greatest Common Divisor
+    - Least Common Multiple
+    - Jacobi Symbol Computation
+    - Multiplicative Inverse
+    - Modular Exponentiation
+    - Fermat & Miller-Rabin Primality Tests
+  * Miscellaneous
+    - Root finding over Z
+    - Pseudo-random integers
+    - Signed & Unsigned comparisons
+    - Karatsuba and Toom-Cook multiplication algorithms
+    - Fast Comba based Multiplier, Squaring and Montgomery routines
+ .
+ This package contains the library needed to run programs that
+ use LibTomMath.

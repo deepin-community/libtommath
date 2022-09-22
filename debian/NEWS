@@ -1,0 +1,7 @@
+libtommath (1.0-1) experimental; urgency=medium
+
+  In libtommath version 1.0 , some macros like MIN and MAX were
+  removed from public header files (e.g. tommath.h). This may break
+  code using libtommath.
+
+ -- Dominique Dumont <dod@debian.org>  Tue, 01 Mar 2016 13:27:52 +0100

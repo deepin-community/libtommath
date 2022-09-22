@@ -1,0 +1,45 @@
+Bug-Debian: https://bugs.debian.org/850723
+Forwarded: https://github.com/libtom/libtommath/pull/69
+Author: Thorsten Glaser <tg@mirbsd.de>
+Acked-by: dod
+Description: Fix shift count overflow on x32
+ Date: Sat Jan 14 10:42:55 2017 +0100
+ .
+    Fix bad detection of 64bit arch on x32
+ .
+    This commit comes from a Debian bug report from Thorsten:
+ .
+      https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=850723
+ .
+    The important part is:
+ .
+    +++++++++++++++++++++++++++++++++
+    As for libtommath… its build logs do not show this warning, but
+    that may be due to a difference in CFLAGS, and it does not have
+    such an extensive testsuite as heimdal, so it might also need to
+    have this patch applied (and forwarded upstream).
+ .
+    A better fix *might* be to fix MP_MASK to read something along
+    the lines of shifting 1ULL left, but the cast should already do
+    that, so I’m unsure why this doesn’t help. Do note that x32 is
+    an ILP32 architecture with 64-bit wide CPU registers (but 32-bit
+    pointers and longs), so 64-bit mode “should” work (and fast, at
+    that) but can be a bit tricky, and that the patch I attached is
+    positively known to fix several issues the heimdal testsuite shows.
+    +++++++++++++++++++++++++++++++++
+ .
+    This commit is a port of the patch proposed by Thorsten.
+ .
+ diff --git a/tommath.h b/tommath.h
+ index b1a97af..4b0b177 100644
+--- a/tommath.h
++++ b/tommath.h
+@@ -35,7 +35,7 @@
+ #endif
+ 
+ /* detect 64-bit mode if possible */
+-#if defined(__x86_64__) || defined(_M_X64) || defined(_M_AMD64) || \
++#if ( defined(__x86_64__) && !defined(__ILP32__) ) || defined(_M_X64) || defined(_M_AMD64) || \
+     defined(__powerpc64__) || defined(__ppc64__) || defined(__PPC64__) || \
+     defined(__s390x__) || defined(__arch64__) || defined(__aarch64__) || \
+     defined(__sparcv9) || defined(__sparc_v9__) || defined(__sparc64__) || \

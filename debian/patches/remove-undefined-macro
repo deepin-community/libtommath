@@ -1,0 +1,14 @@
+Description: remove \undefined macro
+Bug-Debian: https://bugs.debian.org/562349
+Author: Daniel Schepler <dschepler@gmail.com>
+Author: Jari Aalto <jari.aalto@cante.net>
+--- a/doc/bn.tex
++++ b/doc/bn.tex
+@@ -30,7 +30,6 @@
+ \def\And{{\rm\ and\ }}
+ \def\iff{\hspace{1em}\Longleftrightarrow\hspace{1em}}
+ \def\implies{\Rightarrow}
+-\def\undefined{{\rm ``undefined"}}
+ \def\Proof{\vspace{1ex}\noindent {\bf Proof:}\hspace{1em}}
+ \let\oldphi\phi
+ \def\phi{\varphi}

@@ -1,0 +1,9 @@
+---
+LICENSE:
+  override-copyright: ' 2006-2016, Tom St Denis <tomstdenis@gmail.com>'
+  skip: false
+'[^/]*\.[hc]':
+  license: Unlicense
+  skip: false
+bn_mp_n_root:
+  skip: true

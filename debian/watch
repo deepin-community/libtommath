@@ -1,0 +1,8 @@
+# See uscan(1) for format
+
+# Compulsory line, this is a version 3 file
+version=4
+opts="pgpsigurlmangle=s/.xz/.xz.asc/, \
+ filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.xz%libtommath-$1.tar.xz%" \
+  https://github.com/libtom/libtommath/releases/ \
+  download/(?:.*?/)?ltm-(\d[\d.]*)\.tar\.xz debian

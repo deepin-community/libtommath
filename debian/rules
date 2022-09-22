@@ -1,0 +1,73 @@
+#!/usr/bin/make -f
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+  IGNORE_SPEED=yes
+  export IGNORE_SPEED
+endif
+
+# https://wiki.debian.org/HardeningWalkthrough#Selecting_security_hardening_options
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+include /usr/share/dpkg/buildflags.mk
+
+# makefile_include.mk does not support CPPFLAGS
+CFLAGS += $(shell dpkg-buildflags --get CPPFLAGS)
+
+export DESTDIR=$(CURDIR)/debian/tmp
+export PREFIX=/usr
+
+# see https://wiki.debian.org/Multiarch/Implementation
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+export LIBPATH = $(PREFIX)/lib/$(DEB_HOST_MULTIARCH)
+
+export FORCE_SOURCE_DATE=1
+
+%:
+	dh $@
+
+override_dh_auto_build-arch:
+	echo "removing files built upstream"
+	rm -rf pre_gen
+	echo "Creating libtool executable"
+	mkdir debian/libtool
+	cp debian/configure.ac debian/libtool/
+	cd debian/libtool && LIBTOOLIZE='libtoolize -i' autoreconf -f -i
+	dh_auto_configure --sourcedirectory=debian/libtool
+
+	echo "Building libtommath"
+	dh_auto_build --buildsystem=makefile -- -f makefile.shared LIBTOOL=$(CURDIR)/debian/libtool/libtool
+
+override_dh_auto_build-indep:
+	echo "removing files built upstream"
+	rm -f doc/bn.pdf
+
+	echo "Building docs"
+	$(MAKE) docs V=1
+
+override_dh_auto_test-arch:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	echo "compiling test programs"
+	$(MAKE) -f makefile.shared LIBTOOL=$(CURDIR)/debian/libtool/libtool test_standalone
+	echo "running test"
+	./test
+endif
+
+override_dh_auto_test-indep:
+
+override_dh_auto_install-arch:
+	$(MAKE) -f makefile.shared LIBTOOL=$(CURDIR)/debian/libtool/libtool install
+	# remove libtool .la files
+	find debian/tmp -name '*.la' -delete
+
+override_dh_auto_install-indep:
+
+override_dh_install-arch:
+	dh_install --sourcedir=debian/tmp
+
+override_dh_clean:
+	dh_clean doc/tommath.out demo/.libs/ demo/demo.lo libtommath.pc debian/libtool/
+	# move back the built doc shipped in tarball
+	for i in $(CURDIR)/doc/*.pdf.dod; do if [ -e $$i ] ; then mv $$i $${i%%.dod}; fi; done
+
+override_dh_installchangelogs:
+	dh_installchangelogs changes.txt
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [ -n "${DEB_HOST_GNU_TYPE:-}" ]; then
+  CC="$DEB_HOST_GNU_TYPE-gcc"
+else
+  CC=gcc
+fi
+
+echo "creating test binaries"
+make test CC="$CC"
+
+echo "Runing test"
+./test
+
+echo "test done"
