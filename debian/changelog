@@ -1,3 +1,9 @@
+libtommath (1.2.0-6+deb12u1) bookworm; urgency=medium
+
+  * CVE-2023-36328 (Closes: #1051100)
+
+ -- Moritz Mühlenhoff <jmm@debian.org>  Thu, 04 Apr 2024 22:20:38 +0200
+
 libtommath (1.2.0-6) unstable; urgency=medium
 
   [ Helmut Grohne ]
