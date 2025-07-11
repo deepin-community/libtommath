@@ -4,24 +4,23 @@ Uploaders: Dominique Dumont <dod@debian.org>
 Section: libs
 Priority: optional
 Build-Depends: autoconf,
-               debhelper-compat (= 12),
+               debhelper-compat (= 13),
                libtool
 Build-Depends-Indep: ghostscript,
                      libtiff-tools,
                      texlive-latex-extra,
                      texlive-latex-recommended
-Standards-Version: 4.5.1
+Standards-Version: 4.7.0
 Vcs-Browser: https://salsa.debian.org/debian/libtommath
 Vcs-Git: https://salsa.debian.org/debian/libtommath.git
 Homepage: http://www.libtom.net/LibTomMath/
+Rules-Requires-Root: no
 
 Package: libtommath-doc
 Architecture: all
 Multi-Arch: foreign
 Section: doc
 Depends: ${misc:Depends}
-Conflicts: libtommath-docs
-Replaces: libtommath-docs
 Description: multiple-precision integer library [documentation]
  LibTomMath is a C language library that provides a vast array of highly
  optimized functions for number theory; including:

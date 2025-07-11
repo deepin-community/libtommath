@@ -6,7 +6,7 @@ Author: "Manuel A. Fernandez Montecelo" <mafm@debian.org>
 Origin: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=894987
 --- a/testme.sh
 +++ b/testme.sh
-@@ -121,7 +121,7 @@
+@@ -142,7 +142,7 @@
  {
    make clean > /dev/null
    local _timeout=""

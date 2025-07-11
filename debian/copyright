@@ -6,20 +6,28 @@ Files: *
 Copyright: 2006-2016, Tom St Denis <tomstdenis@gmail.com>
 License: Unlicense
 
+Files: bn_mp_prime_strong_lucas_selfridge.c
+Copyright: 2016, Thomas R. Nicely <http://www.trnicely.net>.
+License: Unlicense
+
 Files: debian/*
 Copyright: 2016, Dominique Dumont <dod@debian.org>
-  2008, Joe Nahmias <jello@debian.org>
+ 2008, Joe Nahmias <jello@debian.org>
 License: Unlicense
 Comment: Using the same license as upstream so that Debian patches
  can be used by upstream
 
-Files: doc/bn.tex
+Files: doc/*
 Copyright: 2006-2016, Tom St Denis <tomstdenis@gmail.com>
 License: public-domain
  This text, the library and the accompanying textbook are all hereby placed in the public domain.
 
-Files: mtest/mpi.c
-  mtest/mpi.h
+Files: doc/bn.tex
+Copyright: 2011, Free Software Foundation, Inc.
+License: public-domain
+ This text, the library and the accompanying textbook are all hereby placed in the public domain.
+
+Files: mtest/*
 Copyright: 1998, Michael J. Fromberger
 License: Unlicense
 
