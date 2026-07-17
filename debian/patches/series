@@ -2,4 +2,3 @@ increase-test-timeout
 remove-undefined-macro
 fix-shift-count-overflow-on-x32
 use-utc-timezone
-CVE-2023-36328.patch
