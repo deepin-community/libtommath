@@ -5,5 +5,8 @@ LICENSE:
 '[^/]*\.[hc]':
   license: Unlicense
   skip: false
-bn_mp_n_root:
+bn_mp_root_n:
+  comment: 'Tries to assign copyrithgt to: b <= a and (c+1)**b > a'
+  skip: true
+debian/README.source.org:
   skip: true

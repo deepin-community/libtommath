@@ -2,7 +2,6 @@
 
 # Compulsory line, this is a version 3 file
 version=4
-opts="pgpsigurlmangle=s/.xz/.xz.asc/, \
- filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.xz%libtommath-$1.tar.xz%" \
-  https://github.com/libtom/libtommath/releases/ \
-  download/(?:.*?/)?ltm-(\d[\d.]*)\.tar\.xz debian
+opts="filemanglename=s%(?:.*?)?v?(\d[\d.]*@ARCHIVE_EXT@)%@PACKAGE@-$1%" \
+  https://github.com/libtom/libtommath/tags \
+  (?:.*?/)?v?(\d[\d.]+)@ARCHIVE_EXT@
