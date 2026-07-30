@@ -11,6 +11,8 @@ include /usr/share/dpkg/buildflags.mk
 
 # makefile_include.mk does not support CPPFLAGS
 CFLAGS += $(shell dpkg-buildflags --get CPPFLAGS)
+# Hide internal symbols to avoid GP-relative relocation issues on sw64/alpha
+CFLAGS += -DMP_PRIVATE_SYMBOLS
 
 export DESTDIR=$(CURDIR)/debian/tmp
 export PREFIX=/usr
@@ -46,7 +48,11 @@ override_dh_auto_build-indep:
 override_dh_auto_test-arch:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	echo "compiling test programs"
-	$(MAKE) -f makefile.shared LIBTOOL=$(CURDIR)/debian/libtool/libtool test_standalone
+	# Link test program statically to access internal symbols
+	# (shared library is built with -DMP_PRIVATE_SYMBOLS which hides them)
+	$(MAKE) -f makefile.shared LIBTOOL=$(CURDIR)/debian/libtool/libtool \
+		LTM_LDFLAGS="-static" \
+		test_standalone
 	echo "running test"
 	./test
 endif
