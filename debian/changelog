@@ -1,3 +1,18 @@
+libtommath (1.3.0-1deepin1) unstable; urgency=medium
+
+  * Fix sw64 architecture shared library build failure due to gp-
+    relative relocation
+  * Add -DMP_PRIVATE_SYMBOLS to CFLAGS in debian/rules to hide internal
+    symbols
+  * The s_mp_rand_source global function pointer causes gp-relative
+    relocation errors when building shared libraries on sw64
+    (Sunway/Alpha) architecture
+  * Enabling MP_PRIVATE_SYMBOLS marks all s_-prefixed internal symbols
+    as visibility(hidden), allowing the linker to use direct addressing
+    instead of dynamic symbol resolution
+
+ -- lichenggang <lichenggang@uniontech.com>  Thu, 30 Jul 2026 21:04:52 +0800
+
 libtommath (1.3.0-1) unstable; urgency=medium
 
   [ Dominique Dumont ]
