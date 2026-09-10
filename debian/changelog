@@ -1,3 +1,9 @@
+libtommath (1.3.0-1deepin2) unstable; urgency=medium
+
+  * Rebuild with LTO enabled (dpkg vendor feature optimize/lto).
+
+ -- tunaichao <tunaichao@uniontech.com>  Thu, 10 Sep 2026 19:06:34 +0800
+
 libtommath (1.3.0-1deepin1) unstable; urgency=medium
 
   * Fix sw64 architecture shared library build failure due to gp-
